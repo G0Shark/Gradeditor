@@ -1,0 +1,75 @@
+@font-face {
+    font-family: 'consolas';
+    src: url(/res/consolas.ttf);
+}
+.hello {
+    display: flex;
+    width: 100%;
+}
+.filledtext {
+    text-align: center;
+    font-family: 'consolas';
+    color: antiquewhite;
+    font-size: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+body {
+    background-color: rgb(47, 112, 175);
+}
+header h1 {
+    text-align: center;
+    font-size: 40px;
+    color: white;
+    font-family: 'consolas';
+}
+header h2 {
+    text-align: center;
+    font-size: 25px;
+    color: rgb(214, 213, 213);
+    font-family: 'consolas';
+}
+.container {
+    display: block;
+}
+.field {
+    display: flex;
+    justify-content: center;
+}
+.download{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-size: 20px;
+    font-family: 'consolas';
+    width: 100%;
+}
+.error {
+    color: red;
+    font-family: 'consolas';
+    font-size: 20px;
+    text-align: center;
+}
+input[type="text"]{
+    height: 15px;
+    margin-left: 5px;
+    margin-right: 5px;
+    height: 20px;
+    width: 300px;
+    border-radius: 5px;
+    border: 10px;
+}
+input[type="checkbox"]{
+    left: 0;
+    top: 0;
+    border: 1px solid #dddddd;
+    background-color: #ffffff;
+}
+button {
+    border-radius: 5px;
+    border: 0;
+    font-family: 'consolas';
+    font-size: 15px;
+    background-color: white;
+}

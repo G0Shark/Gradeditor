@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактор успеваемости</title>
+    <link rel="icon" type="image/png" href="/res/2919592.png">
+    <link rel="stylesheet" href="/stl/main.css">
+    <script src="/Pdf.js"></script>
+    <script src="/res/consolas-normal.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Редактор для успеваемости</h1>
+        <h2>Редактор для быстрого создания списка успеваемости</h2>
+    </header>
+    <div class="container">
+        <div class="class">
+            <div class="field">
+                <button class="create">Записать</button>
+                <input type="text" id="name" name="name">
+                <input type="text" id="lastname" name="lastname">
+                <input type="checkbox" name="been" id="been">
+            </div>
+            <div class="filled">
+
+            </div>
+        </div>
+    </div>
+    <script>
+        const btn = document.querySelector('button');
+        const class1 = document.querySelector('.filled');
+        let download = "f";
+        btn.addEventListener("click", function() {
+            if (document.querySelector('#name').value=='' || document.querySelector('#lastname').value=='' || document.querySelector('#been').value==''){
+                const error = document.createElement('h2');
+                error.textContent = 'Ошибка! Пожалуйста, заполните все поля';
+                error.className = 'error';
+                class1.appendChild(error);
+                setTimeout(() => {class1.removeChild(error);}, 5000);
+            }
+            else {
+                const text = document.createElement('h2');
+            const been = document.querySelector('#been');
+            if (been.checked) {
+                been.value = 'был';
+            } else {
+                been.value = 'не был';
+            }
+            text.textContent = document.querySelector('#name').value + ' | ' + document.querySelector('#lastname').value + ' | ' + been.value;
+            text.className = 'filledtext';
+            class1.appendChild(text);
+            if (download == "f") {
+                download = "t";
+                const downbtn = document.createElement('button');
+                document.body.appendChild(downbtn);
+                downbtn.textContent = 'Скачать PDF';
+                downbtn.className = 'download';
+                downbtn.addEventListener("click", function() {
+                    html2canvas(class1, {
+                        onrendered:function(canvas) {
+                            const time = new Date();
+
+                            //Returns the image data URL, parameter: image format and clarity (0-1)
+                            var pageData = canvas.toDataURL('image/jpeg', 1.0);
+
+                            //Default vertical direction, size ponits, format a4[595.28,841.89]
+                            var pdf = new jsPDF('', 'pt', 'a4');
+
+                            //Two parameters after addImage control the size of the added image, where the page height is compressed according to the width-height ratio column of a4 paper.
+                            pdf.addImage(pageData, 'JPEG', 0, 0, 595.28, 592.28/canvas.width * canvas.height );
+                            const filename = 'Успеваемость - ' + time + '.pdf';
+
+                            pdf.save(filename);
+
+                        }
+                    }) 
+                });
+            }
+        }
+        });
+    </script>
+</body>
+</html>
